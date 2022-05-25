@@ -1,6 +1,6 @@
 
 
-!pip install --upgrade pip
+#!pip install --upgrade pip
 !pip3 install tensorflow
 !pip install gym
 !pip install keras

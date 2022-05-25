@@ -1,11 +1,11 @@
 
 
-#!pip install --upgrade pip
-!pip3 install tensorflow
-!pip install gym
-!pip install keras
-!pip install keras-rl2
-!pip3 install flask
+pip install --upgrade pip
+pip3 install tensorflow
+pip install gym
+pip install keras
+pip install keras-rl2
+pip3 install flask
 
 
 

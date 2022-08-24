@@ -1,0 +1,35 @@
+\capitulo{6}{Trabajos relacionados}
+
+La inteligencia artificial es algo que cada vez se esta empezando a implementar más en distintos ámbitos. Tras realizar una búsqueda sobre los distintos proyectos que hay en marcha o que han sido realizados mediante el entrenamiento por refuerzo, encontramos desde juegos de Arcade sencillos hasta investigaciones a nivel global.
+A continuación, se va a hablar más detalladamente de alguno de estos ejemplos.
+
+
+\section{Atari Breakout}
+
+Uno de los ejemplos más básicos en el cual se hace uso del aprendizaje por refuerzo es el videojuego Atari Breakout. En este clásico de las máquinas de arcade el usuario tiene las opciones de mover una plataforma de izquierda a derecha para hacer rebotar en ella una bola y destruir una serie de ladrillos, evitando a la vez que la bola salga por la parte inferior de la pantalla. En la imagen \ref{fig:atari} se puede ver un ejemplo del juego.
+
+\imagen{atari.png}{AtariBreakout}{0.3}
+\label{fig:atari}
+
+En este caso, lo que se busca es entrenar a un agente para que sea capaz de jugar al juego automáticamente por nosotros. No tiene ninguna utilidad específica, pero es un buen ejemplo para entender el funcionamiento del aprendizaje por refuerzo.
+
+
+\section{Control de un reactor de fusión nuclear}
+
+Entrando de lleno en la aplicación real del aprendizaje por refuerzo en proyectos de gran escala, podemos encontrar como el \textit{Swiss Plasma Center - EPFL}\cite{SPC} ha conseguido entrenar un algoritmo capaz de controlar el sobrecalentamiento del plasma contenido en un reactor de fusión nuclear.
+
+La red neuronal del modelo entrenado coge, diez mil veces por cada segundo, unas 90 medidas distintas de distintos parámetros que describen la forma y posición del plasma y usa estos datos para ajustar 19 imanes. Estos imanes crean un campo electromagnético que evita que el plasma roce las paredes del reactor y este pueda quedar dañado.
+
+
+\section{Coches de conducción auto-independiente}
+
+Este seguramente sea uno de los proyectos de R.L. más interesantes a día de hoy. Desde hace varios años se lleva intentado conseguir, por medio de esta herramienta, coches capaces de funcionar sin necesidad de un conductor.
+
+La empresa que encabeza este proyecto es \textbf{Waybe}\cite{Wayve}, aunque hay muchas otras que también están interesadas en desarrollar esta tecnología. Tras 15 años de investigación, esta empresa ha conseguido que un coche entrenado en las calles de Londres, sea capaz de conducirse automáticamente en las ciudades de Cambridge, Coventry, Leeds, Liverpool y Manchester sin necesidad de un entrenamiento adicional. Su objetivo es construir el primer vehículo capaz de conducirse por si solo en 100 ciudades distintas.
+
+En el siguiente vídeo, se puede ver el primer coche al que se consiguió, en tan solo 20 minutos, entrenar para que se mantuviese en carretera por sí solo:
+\href{https://youtu.be/eRwTbRtnT1I}.
+
+Desgraciadamente esto les esta llevando más tiempo del esperado por lo que han decidido optar por, en vez de crear pequeñas redes neuronales y luego conectarlas manualmente, construir una red neuronal que sea capaz de convertir una señal de entrada (por ejemplo una cámara que grabe la carretera por delante del vehículo) en una señal de salida (como puede ser cambiar la dirección de las ruedas o frenar).
+
+Esto es conocido como el aprendizaje \textit{end-to-end}\cite{end_to_end}, el cual ha sido usado en múltiples ocasiones para entrenar otras inteligencias artificiales como es el caso de \textit{AlphaZero}\cite{AlphaZero}.

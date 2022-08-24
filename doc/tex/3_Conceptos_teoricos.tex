@@ -1,0 +1,146 @@
+\capitulo{3}{Conceptos teóricos}
+
+A continuación, se van a exponer una serie de conceptos teóricos para dar al usuario una base de conocimiento para entender el proyecto.
+
+
+\section{Aprendizaje por refuerzo}
+
+\subsection{¿Qué es el aprendizaje por refuerzo?}
+
+El aprendizaje por refuerzo consiste, básicamente, en aprender qué hacer (qué acciones tomar) para maximizar una recompensa numérica. Al “aprendiz” no se le dice que acciones debe tomar, si no que dependiendo de las acciones que tome él por su cuenta, se le dará una mayor o menor recompensa.
+En algunas situaciones, la acción tomada puede afectar incluso a la siguiente situación y, por lo tanto, afectar al resto de recompensas. Tanto la prueba y error, como la dependencia de la acción sobre la recompensa, son las principales características del aprendizaje por refuerzo.
+
+\subsection{Elementos del aprendizaje por refuerzo}
+
+Antes de entrar en mayor detalle sobre cómo se ha aplicado esta técnica en el proyecto, se procede a definir los distintos elementos que componen un modelo de aprendizaje por refuerzo:
+\begin{itemize}
+    \item Acciones: son las distintas decisiones que puede tomar el agente.
+    \item Estado: es la respuesta que el agente recibe del entorno.
+    \item Recompensa: es un valor numérico que recibe el agente dependiendo del resultado de la acción elegida en ese instante. Las acciones con mayor recompensa indican que están mas cerca de alcanzar el objetivo final.
+    \item Entorno: el entorno es el espacio de pruebas con el cual el agente va a interactuar para obtener una respuesta. Aquí es donde se declaran el número de acciones, se actualiza el estado y se construye la función de recompensa.
+    \item Agente: el agente es el "aprendiz" del que se ha hablado anteriormente. Es quien se encarga de tomar las acciones y observar el resultado tras aplicarlas.
+    \item Política: es la estrategia que define cómo se va a comportar el agente para alcanzar el objetivo. La política toma las posibles acciones del agente y elige qué acción aplicar sobre el entorno haciendo uso de un algoritmo predefinido.
+    \item Función de valor: es la recompensa total que se puede esperar de un estado. Mientras que la recompensa nos indica lo buena que es una acción inmediata, la función indica qué es bueno a largo plazo.
+    \item Modelo: el modelo nos permite predecir cómo se va a comportar el entorno cuando ejecutemos acciones sobre éste. 
+    El modelo no siempre es posible tenerlo. Si lo tenemos es más fácil para el agente tomar acciones ya que se puede preguntar al modelo cuál es la acción óptima en cada instante. Si no lo tenemos, el agente deberá probar todas las acciones posibles sobre el entorno en cada para aprender cuál es la forma óptima de llegar al objetivo.
+\end{itemize}
+
+\subsection{Aplicación del aprendizaje por refuerzo al proyecto}
+
+En este proyecto se hace uso del aprendizaje por refuerzo para modelar un agente, el cual va a ser capaz de alcanzar una potencia de referencia indicada, partiendo de un punto inicial aleatorio, aumentando o disminuyendo el ángulo de las aspas del molino.
+
+Para ello, se ha optado por el algoritmo DQN, mediante el cual se ha modelado una estructura de red neuronal, la cual va a utilizar el agente para entrenarse sobre el entorno construido.
+
+Se parte de un total de 3 acciones; aumentar, disminuir y mantener el ángulo de las aspas del molino. A continuación, el agente toma una acción y se actualiza el estado según la acción tomada. Tras esto se otorga una recompensa según si se ha acercado, mantenido o alejado del objetivo, de 10, -1 y -10 respectivamente.
+Por último el entorno devuelve el estado actualizado y la recompensa obtenida, la cual es observada por el agente para decidir cuál será la siguiente acción a tomar.
+
+
+\section{Turbina eólica}
+
+Una turbina eólica es un dispositivo mecánico que convierte la energía eólica en energía eléctrica.
+
+El problema de control que plantea este proyecto, es el de alcanzar la potencia generada óptima para un ángulo de las aspas predeterminado.
+
+\label{fig:turbina}
+\imagen{Turbina.png}{Mecanismo de rotación y generador eléctrico.}{0.9}
+
+En la imagen \ref{fig:turbina}, podemos ver las distintas variables que influyen en el funcionamiento tanto de la turbina, cómo del generador eléctrico.
+
+Según el libro \textit{Control Multivariable Centralizado con Desacoplo para Aerogeneradores de Velocidad Variable}\cite{control_multivariable}, las ecuaciones para el modelo estático de la turbina son las siguientes:
+
+\imagen{img_formulas_turbina/Torque.png}{Torque.}{0.4}
+\label{fig:torque}
+
+\imagen{img_formulas_turbina/PotenciaGenerada.png}{Potencia generada.}{0.4}
+\label{fig:potenciaGenerada}
+
+\imagen{img_formulas_turbina/RelacionPotenciaTorque.png}{Relación potencia torque.}{0.15}
+\label{fig:relacionPotenciaTorque}
+
+\imagen{img_formulas_turbina/tip-speed-ratio.png}{Tip Speed Ratio.}{0.15}
+\label{fig:tipSpeedRatio}
+
+En la figura \ref{fig:torque}, podemos ver la fórmula del \textit{torque}, el cual es el par generado por la fuerza del viento.
+Mediante la fórmula de la figura \ref{fig:potenciaGenerada} calculamos la cantidad de potencia generada por la turbina.
+Tras esto, tenemos la relación entre el torque y la potencia generada en la figura \ref{fig:relacionPotenciaTorque}.
+El \textit{Tip-speed-ratio} de la figura \ref{fig:tipSpeedRatio} es la relación entre la velocidad angular y la velocidad del viento.
+
+Para entender mejor estas ecuaciones, se pasa a definir cada una de las variables:
+
+\begin{itemize}
+    \item \textit{v}: viento.
+    \item \textit{$\lambda$}: Tip-speed-ratio.
+    \item \textit{$\beta$}: ángulo de las aspas.
+    \item \textit{$\tau$a}: par generado por la fuerza del viento.
+    \item \textit{$\rho$}: densidad del viento.
+    \item \textit{$\omega$r}: velocidad angular de la flecha.
+    \item \textit{R}: radio de las aspas.
+    \item \textit{Cq}: coeficiente de eficiencia en el par.
+    \item \textit{Cp}: coeficiente de eficiencia en la potencia generada.
+    \item \textit{Pg}: potencia generada.
+\end{itemize}
+
+En la tabla \ref{tabla:constantes} se muestra el valor de las constantes definidas.
+
+\tablaSmall{Constantes modelo turbina}{l c}{constantes}
+{ \multicolumn{1}{l}{Constante} & Valor\\}{ 
+\textit{v} & 10 m/s\\
+\textit{$\rho$} & 1,225 kg/m^3\\
+\textit{R} & 2 m\\
+}
+
+Para reducir la complejidad de la matemática y evitar utilizar excesivo tiempo en esta parte del proyecto, se ha realizado una simplificación de las fórmulas anteriores en una sola:
+
+\imagen{img_formulas_turbina/ModeloReducido.png}{Modelo dinámico reducido basado en el estático.}{0.6}
+\label{fig:modeloReducido}
+
+En la figura \ref{fig:modeloReducido} se puede ver la fórmula final que será utilizada para calcular la potencia del modelo. Decir que para calcular el coeficiente \textit{Cp}, se ha optado por linealizar la función, tomando un valor fijo de \textit{$\lambda$}=6, que es el valor que permite el máximo coeficiente \textit{Cp}. Esto se ha hecho teniendo en cuenta el punto de funcionamiento más óptimo del molino, para no complicar demasiado el modelo. También añadir que el ángulo de las aspas \textit{$\beta$} puede variar entre los valores 5º y 14º.
+De esta forma, la fórmula quedería como se ve en la figura \ref{fig:coeficientePotencia}
+
+\imagen{img_formulas_turbina/CoeficientePotencia.png}{Coeficiente de eficiencia en la potencia generada.}{0.5}
+\label{fig:coeficientePotencia}
+
+
+\section{Método de Euler}
+
+El método de Euler es un procedimiento matemático de integración numérica para resolver ecuaciones diferenciales. Este método se usa para calcular la traza de una curva conociendo su punto de comienzo.
+Explicado de manera informal el método consiste en, a partir de la ecuación diferencial, calcular la pendiente de la curva en dicho punto y con ello la recta tangente a la curva. Tras esto, damos un pequeño paso sobre la recta para tomar un nuevo punto y repetimos lo mismo realizado anteriormente.
+Tras varios pasos, habremos formado una curva a través de esos puntos. Es cierto que siempre va a existir un error entre la curva calculada y la original, aunque este error puede ser minimizado disminuyendo el tamaño de los pasos al avanzar sobre la recta tangente.
+
+Se procede a detallar cómo se ha resuelto el modelo reducido de la turbina utilizando este método:
+
+    1. Primero, se aproxima la derivada de la función por un cociente de incrementos. Quedaría lo que se muestra en la figura \ref{fig:euler1}
+
+    \imagen{img_formulas_turbina/euler1.png}{Derivada de la potencia aproximada.}{1}
+    \label{fig:euler1}
+
+    2. Tras esto, se pasa a calcular el valor de la potencia en el instante t=0, es decir, con el valor del ángulo en el instante inicial.
+    
+    3. Una vez se conoce la potencia inicial, se toma un paso de integración y se decide el número de iteraciones que se van a realizar (cuantas más iteraciones se obtendrá un resultado más preciso, pero más lento, ya que se requiere un mayor número de cálculos). En la figura \ref{fig:pasosIntegracion} se muestra como sería la resolución numérica de nuestra fórmula por el método de Euler. 
+    
+    \imagen{img_formulas_turbina/PasosIntegracion.png}{Pasos de integración para aproximar la derivada de la turbina.}{1}
+    \label{fig:pasosIntegracion}
+    
+    Añadir que se ha utilizado un paso de integración de 0.5s.
+
+\section{Red neuronal}
+
+Una red neuronal\cite{RedNeuronal} es un modelo que simula de manera simplificada la forma en la que el cerebro procesa información.
+Estas redes se componen por neuronas, las cuales a su vez se organizan por capas. Estas normalmente suelen seguir la siguiente estructura:
+\begin{itemize}
+    \item Capa de entrada: donde se especifica el número de variables de entrada.
+    \item Una o más capas ocultas.
+    \item Capa de salida: dónde se especifican las variables de salida.
+\end{itemize}
+
+En la imagen \ref{fig:dqn}, se puede ver la estructura de una red neuronal.
+
+\imagen{dqn.png}{Estructura de una red neuronal.}{0.7}
+\label{fig:dqn}
+
+Para este proyecto, se ha decidido utilizar una arquitectura DQN para resolver el problema de aprendizaje por refuerzo. Para ello, se ha creado una red neuronal de 3 capas:
+\begin{itemize}
+    \item Se ha creado una primera capa de 64 neuronas con tipo de función de activación \textit{relu}\cite{FuncActivacion} (de esta forma sus parámetros serán siempre positivos) a la que le pasamos las dimensiones de la variable estado del entorno.
+    \item Se ha creado una segunda capa de 32 neuronas con la misma función de activación.
+    \item Por último, se ha añadido una capa de salida a la que se le indica el número de acciones como parámetro de salida y función de activación \textit{linear}\cite{FuncActivacion}, ya que lo que se busca es obtener el estado en sus 3 distintas variantes, según la acción escogida, sin ningún tipo de alteración.
+\end{itemize}

@@ -1,0 +1,30 @@
+\apendice{Especificación de diseño}
+
+\section{Introducción}
+
+Mediante la especificación de diseño, se aporta un mayor entendimiento del proyecto al equipo de desarrollo y se definen los datos que usa la aplicación, el diseño procedimental y la arquitectura.
+
+\section{Diseño de datos}
+
+En el caso de este proyecto, no es necesario el manejo de datos.
+
+Como mucho podríamos hablar de la memoria secuencial que utiliza el agente. En esta se van almacenando los resultados de los entrenamientos pasados, hasta un límite que definamos nosotros.
+Cuando el backlog de los entrenamientos llega a este límite, la información del último entrenamiento sustituirá a la más antigua en memoria, ya que presupone que esta nueva información es más útil y precisa.
+
+\section{Diseño procedimental}
+
+En este apartado se procede a detallar la secuencia que sigue la ejecución del modelo.
+
+En el diagrama de secuencia de la figura \ref{fig:DiagramaSecuencia}, se aprecian las interacciones entre los objetos que conforman el modelo.
+
+\imagen{DiagramaSecuenciaTFG.png}{Diagrama de secuencia del modelo}{1.0}
+\label{fig:DiagramaSecuencia}
+
+\section{Diseño de interfaces}
+
+Para este proyecto, se pedía la creación de una interfaz sencilla que permitiese al usuario introducir una cantidad de potencia.
+
+En la figura \ref{fig:interfaz}, se muestra otro diagrama del planteamiento de la interfaz.
+
+\imagen{Interfaz.png}{Diagrama de la interfaz de la aplicación}{1}
+\label{fig:interfaz}

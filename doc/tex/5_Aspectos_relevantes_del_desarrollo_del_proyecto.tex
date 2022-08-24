@@ -1,0 +1,117 @@
+\capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
+
+Este apartado pretende recoger los aspectos más interesantes del desarrollo del proyecto, los problemas que han ido surgiendo y de qué forma se ha procedido para solventarlos.
+
+
+\section{Idea y primeros pasos del proyecto}
+
+La elección de este proyecto se ha visto condicionada, tanto por el interés del alumno en afianzar sus conocimientos en inteligencia artificial, siendo un proyecto muy completo en el que se hace uso de varios elementos de esta rama de la informática; como por la preocupación por la escasa importancia que se le ha dado al uso de las energías renovables en este país y la necesidad de invertir más en ello.
+
+Lo primero que se planteó en las primeras reuniones con los tutores, fueron las herramientas que se iban a utilizar para desarrollar el mismo. Como lenguajes se barajaron dos opciones, Python y Java, aunque se optó rápidamente por la primera opción debido a la sencillez del lenguaje y a que iba a ser una aplicación ejecutada en la web. 
+Además, como entorno de desarrollo se eligió Jupyter Notebook, ya que se estimó que iba a ser un proyecto en el cuál se iban a tener que realizar un gran número de pruebas y esta herramienta cumplía esa función perfectamente.
+
+Tras esto se creó tanto un repositorio en GitHub donde subir el código del modelo e ir observando su evolución, como un espacio en Microsoft Sharepoint para compartir libros, artículos, enlaces y TFGs de referencia.
+
+Por último, se estableció la frecuencia con la que se irían realizando las reuniones para tratar los avances realizados en el proyecto.
+
+
+\section{Formación}
+
+La completa realización del proyecto ha conllevado un continuo trabajo de investigación con el objetivo de resolver las dudas que han ido surgiendo durante la evolución de este.
+
+La mayoría de las herramientas han requerido de una formación previa para su correcta utilización. Desde herramientas como Github, ya utilizada y de la cual se han ampliado conocimientos; como puede ser \LaTeX, donde se partía de cero.
+
+Si hay que destacar algo en lo que se hizo bastante hincapié en cuanto a la formación, fue sobre el qué es, cómo funciona y para qué sirve el aprendizaje por refuerzo.
+Sobre este tema se recomendó gran variedad de contenido por parte de los tutores para afianzar los conocimientos del alumno como libros, blogs, vídeos, ejemplos de código, etc. Incluso se tomó una de las reuniones como seminario para explicar de forma detallada y con ejemplos el funcionamiento del aprendizaje por refuerzo.
+
+
+\section{Desarrollo del modelo}
+
+\subsection{Entorno}
+
+La primera parte que se optó por desarrollar, como en cualquier tipo de modelo de aprendizaje por refuerzo, fue el entorno.
+
+\subsubsection{Primera versión}
+
+En un comienzo, debido al escaso conocimiento inicial del alumno, se optó por realizar un entorno muy básico de 3 acciones discretas en el que se buscaba mantener una variable dentro de un rango de valores.
+
+Esto se hizo para primero comprobar el correcto comportamiento del agente entrenado sobre el entorno antes de entrar en la parte matemática del proyecto con el método de Euler y las ecuaciones de la turbina eólica.
+
+\subsubsection{Segunda versión}
+
+Una vez comprobado que el agente se entrenaba correctamente, se procedió a aumentar el número de acciones para hacer el algoritmo más rápido y preciso.
+
+También se añadió la parte de la integración numérica de la ecuación de la potencia generada por la turbina mediante el método de Euler y se ajustaron algunos parámetros para optimizar el funcionamiento del algoritmo.
+
+\subsection{Modelo DQN}
+
+\subsubsection{Primera versión}
+
+Para la construcción del modelo, se optó por la utilización de una estructura DQN de tipo secuencial, con dos capas ocultas de neuronas que utilizan la función de activación \textit{relu} y una última capa de salida con una función \textit{linear}.
+
+La función de activación se define como el mecanismo mediante el cual las neuronas mandan información a través de la red. La función \textit{relu} es la más usada en los sistemas de redes neuronales ya que hace el modelo más fácil de entrenar y permite conseguir mejores resultados.
+Lo que hace esta función es devolver el propio valor que le llega como entrada en caso de ser positivo y cero en caso contrario, lo que provoca que menos neuronas de cada capa se activen y la red tenga un mejor rendimiento.
+La última capa usamos una función \textit{linear} ya que lo que buscamos es aproximar un valor de estado real para cada acción. Por ello usamos esta función, la cual nos devuelve el valor de la entrada sin ningún tipo de cambio.
+
+\subsubsection{Segunda versión}
+
+Esta parte del código no se cambió mucho con respecto a la primera versión, quitando algún ajuste en la distribución y el número de neuronas de las capas.
+
+\subsection{Agente DQN}
+
+\subsubsection{Primera versión}
+
+Para el agente se asignó una memoria secuencial y la política de Boltzmann\cite{wiki:Boltzmann}.
+
+Esta política esta diseñada para \textit{action spaces} de tipo discreto. Presupone que todas las acciones tienen un valor asignado y utiiza una función \textit{Softmax} para transformar estos valores en un vector de probabilidades. Tras esto utiliza el vector calculado para realizar pruebas con las posibles acciones.
+
+\subsubsection{Segunda versión}
+
+Para la versión final, se ajustaron algunos parámetros como el límite de pasos guardados en memoria el cual, tras varias pruebas, se estableció en 50000 y el número de pasos de "calentamiento" que se decidió fijar en 1000.
+
+\subsection{Entrenamiento}
+
+Para el entrenamiento del agente, se ha usado la función \textit{fit} de \textit{Tensorflow}. 
+Lo primero que hacemos es compilar nuestro agente utilizando el optimizador Adam, que es el de uso común en el aprendizaje por refuerzo, y seguidamente llamamos a la función \textit{fit} en la que, tras varias pruebas, se ha llegado a la conclusión de que 10000 pasos son los suficientes para lograr un buen entrenamiento.
+
+Los optimizadores en las redes neuronales, ayudan a reducir las pérdidas alterando algunos parámetros como el \textit{learning rate}.
+
+\subsection{Pruebas}
+
+Durante todo el desarrollo del modelo se han realizado pruebas para comprobar la funcionalidad de todo lo que se iba implementando.
+
+En cuanto a las pruebas de carácter funcional se han dividido en dos tipos.
+
+\subsubsection{Pruebas pre-entrenamiento}
+
+Para poder ver claramente la diferencia entre el modelo desentrenado y el entrenado, se realizaron una serie de pruebas tomando acciones aleatorias, donde se ve como el modelo no alcanza nunca la potencia deseada.
+
+\imagen{img_pruebas_graficas/Pre_entrenamiento.png}{Gráfica pruebas pre-entrenamiento.}{0.7}
+\label{fig:pre}
+
+Como podemos observar en la figura \ref{fig:pre}, los resultados del modelo sin entrenamiento muestran una gráfica en la que nunca se alcanza la potencia de referencia ya que las acciones tomadas son totalmente aleatorias.
+
+\subsubsection{Pruebas post-entrenamiento}
+
+Para las pruebas post entrenamiento, se utilizó el mismo entorno de pruebas que en el caso anterior, pero esta vez dejando que el agente entrenado sea el que tome la decisión sobre qué acción tomar en cada momento, pasándole como referencia un estado inicial aleatorio.
+
+En este caso, para ver el correcto funcionamiento, se realizaron tres tipos de pruebas:
+
+\begin{itemize}
+    \item Pruebas sin cambios ni perturbaciones.
+    \item Pruebas añadiendo perturbaciones en el viento.
+    \item Pruebas añadiendo cambios en la potencia de referencia.
+\end{itemize}
+
+\textcolor{red}{Añadir imágenes de las pruebas realizadas tras el entrenamiento.}
+
+\subsection{Interfaz}
+
+Una vez realizadas las pruebas y comprobado que el modelo realizaba bien las predicciones tras el entrenamiento, se precedió a construir la interfaz web.
+En un comienzo se empezó a desarrollar utilizando la librería de Python \textit{Tkinter} ya que se pedía una interfaz muy sencilla.
+
+El problema vino a la hora de querer implementar esta interfaz en una aplicación web ya que requería de un conocimiento sobre la herramienta más profundo. Debido a esto se decidió investigar otras formas de desarrollar la interfaz y se optó por el uso del paquete \textit{Flask} el cual, aunque fuese algo más complejo debido a la necesidad de conocimiento de HTML, seguía siendo muy sencillo y fácil de implementar en la web.
+
+Se decidió crear una interfaz sencilla con una plantilla desarrollada en HTML la cual se divide en dos botones y un cuadro de texto. Este cuadro recoge la potencia de referencia y cada uno los botones muestra una gráfica con el resultado pre y post entrenamiento respectivamente.
+
+El desarrollo en python no tiene mucho misterio ya que simplemente se utilizó el mismo código que se usó para realizar las pruebas combinado con las utilidades de \textit{Flask}.

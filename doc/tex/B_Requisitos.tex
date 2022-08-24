@@ -1,0 +1,137 @@
+\apendice{Especificación de Requisitos}
+
+\section{Introducción}
+
+En esta parte de los anexos se detalla toda la serie de requisitos que definen el proyecto. Sirven para contrastar cierta documentación entre el cliente y el equipo de desarrollo y para analizar el comportamiento de la aplicación.
+
+Para realizar una buena especificación de requisitos, esta debe ser:
+\begin{itemize}
+    \item \textbf{Completa}: deben aparecer todos los requisitos, tanto funcionales como no funcionales.
+    \item \textbf{Correcta}: el software del proyecto debe cumplir los requisitos que aquí se exponen.
+    \item \textbf{Consistente}: debe seguir una línea de coherencia y cohesión con los propios requerimientos.
+    \item \textbf{Modificable}: facilidad de modificación de los requerimientos.
+    \item \textbf{Verificable}: debe ser posible probarlo sin costo alguno.
+    \item \textbf{Trazable}: posibilidad de conocer la ubicación de un ítem a través de su identificador.
+    \item \textbf{Priorizable}: los requisitos se ordenan según su importancia para dar preferencia a los más relevantes.
+\end{itemize}
+
+
+\section{Objetivos generales}
+
+Los objetivos del proyecto son los siguientes:
+\begin{itemize}
+    \item Modelar el comportamiento de una turbina eólica a partir de un algoritmo de aprendizaje por refuerzo, el cuál sea capaz de ajustarse automáticamente a una demanda de energía dada.
+    \item Calcular y aplicar las ecuaciones que intervienen en el funcionamiento de una turbina eólica.
+    \item Diseñar una interfaz-web sencilla para interactuar con el software del modelo.
+    \item Facilitar el entendimiento de la respuesta del molino mediante gráficas.
+\end{itemize}
+
+
+\section{Catálogo de requisitos}
+
+Se proceden a describir los requisitos del proyecto, los cuales se dividen en dos tipos:
+
+\subsection{Requisitos funcionales}
+
+\begin{itemize}
+    \item \textbf{RF 1 - Entrenamiento del agente}. El agente debe ser capaz de entrenarse sin problemas, devolviendo un buen resultado de entrenamiento.
+    \begin{itemize}
+        \item \textbf{RF 1.1 - Creación del entorno}. El entorno debe crearse correctamente, instanciando la clase en una variable.
+        \item \textbf{RF 1.2 - Creación del agente}. El agente debe comunicarse correctamente con la red neuronal con la que va a trabajar.
+        \item \textbf{RF 1.3 - Entrenamiento}. El agente debe entrenarse, comunicándose correctamente con el entorno donde va a realizar las pruebas del entrenamiento. También es importante el tiempo que va a entrenar, ya que demasiado tiempo de entrenamiento puede llevar a lo que conocemos como \textit{overtraining}\cite{overtraining}.
+    \end{itemize}
+    \item \textbf{RF 2 - Pruebas del entrenamiento}. Deben realizarse correctamente una o varias pruebas que muestren el correcto entrenamiento del agente.
+    \begin{itemize}
+        \item \textbf{RF 2.1 - Pruebas pre-entrenamiento}. Se realizan unas pruebas tomando acciones aleatorias para mostrar el funcionamiento del modelo sin un agente entrenado.
+        \item \textbf{RF 2.2 - Pruebas post-entrenamiento}. El agente entrenado debe realizar una serie de pruebas sobre el modelo para mostrar los resultados tras el entrenamiento.
+    \end{itemize}
+    \item \textbf{RF 3 - Correcto funcionamiento de la interfaz web}. El usuario debe ser capaz de introducir una potencia de referencia y observar en una gráfica la respuesta del modelo ante esa acción.
+    \begin{itemize}
+        \item \textbf{RF 3.1 - Comprobación de seguridad} Se comprueba que el usuario pueda introducir únicamente una variable numérica.
+        \item \textbf{RF 3.2 - Impresión por pantalla de gráfica} Se procede a mostrar correctamente una o varias gráficas en la propia web con resultados sobre la ejecución del modelo.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Requisitos no funcionales}
+
+\begin{itemize}
+    \item  \textbf{RNF 1 - Usabilidad}. La interfaz de la aplicación debe ser sencilla e intuitiva.
+    \item  \textbf{RNF 2 - Rendimiento}. Los tiempos de carga deben ser aceptables y no tediosos.
+    \item  \textbf{RNF 3 - Disponibilidad}. La aplicación debe poder usarse en cualquier lugar, en cualquier momento.
+    \item  \textbf{RNF 4 - Accesibilidad}. La aplicación debe poder usarse por cualquier persona independientemente de sus capacidades técnicas/cognitivas. 
+\end{itemize}
+
+
+\section{Especificación de requisitos}
+
+A continuación, se procede a detallar los distintos casos de uso que cubren los requisitos funcionales que acabamos de indicar.
+
+\tablaSmall{CU 01 - Creación del entorno}{l c}{creacionentorno}
+{ \multicolumn{1}{l}{CU 01} & Creación del entorno\\}{ 
+Autor & Diego Garrido Calvo\\
+Requisitos asociados & RF 1.1\\
+Descripción & El entorno debe crearse correctamente, instanciando la clase en una variable.\\
+Pre-condición & El usuario debe haber ejecutado el modelo.\\
+Acción & El usuario ejecuta el código de Jupyter Notebook.\\
+Post-condición & El entorno queda instanciado para su posterior uso.\\
+}
+
+\tablaSmall{CU 02 - Creación del agente}{l c}{creaciónagente}
+{ \multicolumn{1}{l}{CU 02} & Creación del agente\\}{ 
+Autor & Diego Garrido Calvo\\
+Requisitos asociados & RF 1.2\\
+Descripción & El agente debe comunicarse correctamente con la red neuronal con la que va a trabajar.\\
+Pre-condición & La red neuronal debe estar correctamente creada.\\
+Acción & Se instancian tanto el agente como la red neuronal.\\
+Post-condición & El agente queda listo para su entrenamiento.\\
+} 
+
+\tablaSmall{CU 03 - Entrenamiento}{l c}{entrenamiento}
+{ \multicolumn{1}{l}{CU 03} & Entrenamiento\\}{ 
+Autor & Diego Garrido Calvo\\
+Requisitos asociados & RF 1.3\\
+Descripción & El agente debe entrenarse, comunicándose correctamente con el entorno donde va a realizar las pruebas del entrenamiento. También es importante el tiempo que va a entrenar, ya que demasiado tiempo de entrenamiento puede llevar a lo que conocemos como \textit{overtraining}.\\
+Pre-condición & Tanto el agente como el entorno deben estar creados.\\
+Acción & El agente se entrena sobre el entorno instanciado.\\
+Post-condición & El agente queda entrenado.\\
+}
+
+\tablaSmall{CU 04 - Pruebas pre-entrenamiento}{l c}{pruebaspre}
+{ \multicolumn{1}{l}{CU 04} & Pruebas pre-entrenamiento\\}{ 
+Autor & Diego Garrido Calvo\\
+Requisitos asociados & RF 2.1\\
+Descripción & Se realizan unas pruebas tomando acciones aleatorias para mostrar el funcionamiento del modelo sin un agente entrenado.\\
+Pre-condición & Debe haberse creado el entorno.\\
+Acción & El usuario elige la opción de ver el resultado antes del entrenamiento.\\
+Post-condición & Resultados de la prueba.\\
+}
+
+\tablaSmall{CU 05 - Pruebas post-entrenamiento}{l c}{pruebaspost}
+{ \multicolumn{1}{l}{CU 05} & Pruebas post-entrenamiento\\}{ 
+Autor & Diego Garrido Calvo\\
+Requisitos asociados & RF 2.2\\
+Descripción & El agente entrenado debe realizar una serie de pruebas sobre el modelo para mostrar los resultados tras el entrenamiento.\\
+Pre-condición & Deben haberse creado tanto el entorno como el agente, y el agente estar entrenado.\\
+Acción & El usuario elige la opción de ver el resultado después del entrenamiento.\\
+Post-condición & Resultados de la prueba.\\
+}
+
+\tablaSmall{CU 06 - Comprobación de seguridad}{l c}{comprobacionseguridad}
+{ \multicolumn{1}{l}{CU 06} & Comprobación de seguridad\\}{ 
+Autor & Diego Garrido Calvo\\
+Requisitos asociados & RF 3.1\\
+Descripción & Se comprueba que el usuario pueda introducir únicamente una variable numérica.\\
+Pre-condición & El usuario debe haber ejecutado el modelo tras introducir una cantidad de potencia.\\
+Acción & Se comprueba el tipo de la variable introducida.\\
+Post-condición & En caso de que sea una variable numérica, el modelo se ejecuta; en caso contrario, aparece por pantalla un mensaje de error indicando al usuario lo que ha hecho mal.\\
+}
+
+\tablaSmall{CU 07 - Impresión por pantalla de gráfica}{l c}{impresionpantalla}
+{ \multicolumn{1}{l}{CU 07} & Impresión por pantalla de gráfica\\}{ 
+Autor & Diego Garrido Calvo\\
+Requisitos asociados & RF 3.2\\
+Descripción & Se procede a mostrar correctamente una o varias gráficas en la propia web con resultados sobre la ejecución del modelo.\\
+Pre-condición & La comprobación de errores debe haber finalizado sin errores.\\
+Acción & Se instancia un \textit{plot} con los datos obtenidos de la prueba.\\
+Post-condición & Se muestra por pantalla la gráfica resultante.\\
+}

@@ -1,0 +1,152 @@
+\capitulo{4}{Técnicas y herramientas}
+
+Esta parte de la memoria tiene como objetivo presentar las técnicas metodológicas y las herramientas de desarrollo que se han utilizado para llevar a cabo el proyecto.
+
+
+\section{Metodologías usadas}
+
+\subsection{Metodología Scrum}
+
+La metodología Scrum\cite{MetScrum} es una forma de organización para facilitar la colaboración entre los distintos miembros de un equipo a la hora de realizar un proyecto. Esta metodología consiste en reuniones, roles y herramientas que ayuden al equipo a tener un trabajo más fluido. 
+
+Está dividida en \textit{sprints}, que se definen como las partes en las que se divide el proyecto. En este caso, durante el primer mes se han realizado \textit{sprints} cada una/dos semanas, donde se comentaban los objetivos del proyecto, las fuentes de donde obtener la información y lo que se iba avanzando entre cada una de estas reuniones. Para los siguientes meses, se ha disminuido el número de \textit{sprints} ya que estos eran meramente informativos y para consultar dudas. Esto ha cambiado a lo largo del último mes, donde se ha vuelto a la continuidad de un \textit{sprint} por semana para ultimar los últimos detalles.
+
+\subsection{Técnica Pomodoro}
+
+La técnica Pomodoro\cite{TecPomodoro} es una estrategia que ayuda a optimizar la concentración a la hora de realizar un proyecto, estudiar, etc.
+
+Consiste en dividir el trabajo en espacios de tiempo de unos 25 minutos, realizando una pausa de 5 minutos entre cada uno de ellos. Al mismo tiempo, cada 4 espacios de tiempo se realiza una pausa más larga, de entre 20 - 30 minutos.
+
+
+\section{Repositorio}
+
+\subsection{GitHub}
+
+GitHub\cite{GitHub} es una plataforma de almacenamiento en la nube para el control de versiones y la colaboración, la cual permite el trabajo con otras personas sobre el mismo proyecto desde cualquier parte del mundo. En ella los desarrolladores pueden almacenar, testear y colaborar al mismo tiempo en el proyecto.
+
+Otra de las opciones que se tuvo en cuenta, fue el uso de GitLab, pero fue descartado debido a que GitHub ya se había utilizado anteriormente y había más familiaridad con su entorno.
+
+El enlace al repositorio es el siguiente:
+\href{https://github.com/Di3go99/GII-21.35-Control-de-un-molino-eolico-usando-Aprendizaje-por-refuerzo-profundo}{https://github.com/Di3go99/GII-21.35-Control-de-un-molino-eolico-usando-Aprendizaje-por-refuerzo-profundo}
+
+
+\section{Control de versiones}
+
+\subsection{Git}
+
+Git\cite{Git} es hoy en día el sistema de control de versiones más utilizado del mundo. Gracias a Git, podemos llevar un registro de los cambios que realicemos en los archivos de nuestro ordenador y coordinar el trabajo entre varias personas en un proyecto conjunto.
+
+Como ya se ha comentado, el repositorio usado es GitHub que, a través de Git, nos ofrece un control de versiones para nuestro proyecto. 
+
+También se valoró la opción de usar en su lugar la herramienta Subversion, aunque se descartó debido a la facilidad de uso de Git. 
+
+
+\section{Gestión del proyecto}
+
+\subsection{Microsoft Sharepoint}
+
+Microsoft Sharepoint\cite{Sharepoint} es una web basada en la colaboración que utiliza herramientas de flujo de trabajo para fortalecer el trabajo en equipo en entornos empresariales.Gracias a esta herramienta podemos:
+
+\begin{itemize}
+    \item Construir webs privadas, espacios de almacenamiento de archivos y listas.
+    \item Personalizar el contenido de nuestras webs.
+    \item Compartir avisos importantes, actualizaciones y noticias con gente de nuestro proyecto.
+    \item Organizar tu trabajo mediante flujos de trabajo, formularios y listas.
+    \item Almacenar y sincronizar tus archivos en la nube para mantenerlos a salvo.
+\end{itemize}
+
+Durante la realización del proyecto, se ha utilizado Microsoft Sharepoint tanto para compartir libros, artículos y otros TFG orientativos; como para subir correcciones de la memoria y los anexos del propio proyecto.
+
+Se barajó también la posibilidad de usar ZenHub, ya que permitía una organización por tareas, pero se descartó ya que se quiso simplificar dicha organización y no hacerla tan compleja.
+
+
+\section{Entorno de desarrollo}
+
+\subsection{Jupyter Notebook}
+
+Jupyter Notebook\cite{Jupyter} es una aplicación en la web a modo de repositorio que permite tanto la creación como la compartición de documentos de código. Es compatible con varios lenguajes y principalmente se usa para el análisis y visualización de datos, además de computación interactiva.
+
+Es una herramienta muy sencilla de usar ya que únicamente dispone de un explorador de archivos y el editor de texto.
+Es muy útil a la hora de realizar prototipado de código ya que el código se divide en celdas independientes, lo que permite ejecutar partes del código por separado.
+
+Esta herramienta ha sido la principal en el desarrollo del proyecto ya que se ha utilizado para la completa construcción del código del modelo.
+
+
+\section{Leguajes de desarrollo}
+
+\subsection{Python}
+
+Python\cite{Python} es un lenguaje multiplataforma y de código abierto el cual tiene una sintaxis muy simple y sencilla de usar, lo que lo convierte en uno de los lenguajes de programación más utilizados hoy en día.
+
+Entre los campos que Python nos permite trabajar encontramos inteligencia artificial, machine learning, big data y data science, entre otros.
+
+El proyecto se ha desarrollado en un 99\% en Python, exceptuando la interfaz web.
+
+\subsection{HTML}
+
+HTML\cite{HTML} es otro lenguaje muy famoso, que se utiliza para el desarrollo web. Este define tanto la estructura como el significado del contenido de una página.
+
+En este proyecto se ha usado esta herramienta junto a Flask para diseñar la interfaz web mediante la cual el usuario interactúa con el modelo del molino.
+
+
+\section{Librerías y paquetes}
+
+\subsection{Aprendizaje por refuerzo}
+
+\subsubsection{Open AI Gym}
+
+Open AI gym es una librería de Python la cuál dispone de varias funciones para facilitar el aprendizaje por refuerzo. Además, dispone de varios entornos de prueba desarrollados usando distintos algoritmos de entrenamiento y fáciles de configurar.
+
+Esta librería está pensada para aumentar la reproducción de estos algoritmos y proveer al usuario de herramientas que ayuden a entender mejor las bases de la inteligencia artificial.
+
+\subsubsection{Keras RL}
+
+Keras-rl es un paquete de Python que facilita la integración de algoritmos de aprendizaje por refuerzo.
+
+Además, incluye varios ejemplos predefinidos de algoritmos de RL para que el usuario pueda interactuar con ellos y aprender desde una visión más práctica el funcionamiento del aprendizaje por refuerzo.
+
+\subsubsection{Tensorflow}
+
+Tensorflow es una librería de uso libre dedicada al aprendizaje por refuerzo que permite construir modelos de forma más rápida y fácil.
+
+Estas 3 librerías se han utilizado para implementar la funcionalidad necesaria en cuanto al aprendizaje por refuerzo y las redes neuronales.
+
+\subsection{Interfaz-web}
+
+\subsubsection{Flask}
+
+Flask\cite{Flask} es un \textit{framework} de Python que nos permite diseñar aplicaciones web de manera muy sencilla.
+
+Mediante esta herramienta y junto a las plantillas HTML, se ha diseñado la web del modelo.
+
+
+\section{Documentación}
+
+\subsection{Latex}
+
+\LaTeX es una herramienta de composición de textos, con el objetivo de crear documentos con una gran calidad tipográfica. Suele estar enfocado a la creación de artículos o libros científicos que requieren del uso de expresiones matemáticas.
+
+Para la creación de la memoria del proyecto, se ha hecho uso de este lenguaje mediante la herramienta web Overleaf, la cual esta destinada al uso de Latex, además de ser sencilla de usar y muy intuitiva.
+
+En un principio, se barajó el uso de Microsoft Office Word para esta tarea, de hecho, se comenzó a realizar la memoria en esta herramienta, pero se decidió darle una oportunidad a Latex ya que permite que el documento quede más limpio y ordenado, además de que la UBU dispone de una plantilla ya creada disponible para todos los alumnos.
+Por otro lado, también se realizó el cambio por el interés y la curiosidad del alumno por aprender a usar la herramienta.
+
+
+\section{Comunicación}
+
+La comunicación con los tutores ha sido a través de:
+
+\begin{itemize}
+    \item Reuniones a través de Microsoft Teams.
+    \item Mensajes de correo electrónico a través de Outlook utilizando el correo de la universidad.
+    \item Compartición de documentos y archivos mediante Microsoft Sharepoint.
+\end{itemize}
+
+
+\section{Pruebas}
+
+\subsection{Codacy}
+
+Codacy\cite{Codacy} es una herramienta web que realiza análisis de código para desarrolladores y determina un porcentaje de calidad del código basándose en la complejidad, estilo y funcionamiento del mismo.
+
+Aunque en ningún momento se hizo una subida al repositorio de GitHub con errores en el código ya que se fueron solucionando a través de la propia herramienta Jupyter Notebook, se decidió por realizar un análisis del código a través de Codacy para comprobar duplicidades de código y otras \textit{best practices}.

@@ -1,5 +1,14 @@
 <form method="post" action="">
     <p>Power: {{( form.r )}}</p>
-    <p><input type="submit" value="submit"/></p>
-    <p><img src="/" alt="my plot"></p>
+    <p><input type="submit" name="submit_button" value="non-trained"/></p>
+    <p><input type="submit" name="submit_button" value="trained"/></p>
+    {% with messages = get_flashed_messages() %} 
+        {% if messages %} 
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
+        {% else %}
+            <p><img src="/" alt=""></p>
+        {% endif %} 
+    {% endwith %}
 </form>

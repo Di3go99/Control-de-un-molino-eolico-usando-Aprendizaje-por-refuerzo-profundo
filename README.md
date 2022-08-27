@@ -1,6 +1,6 @@
 # -Control-de-un-molino-eólico-usando-Aprendizaje-por-refuerzo-profundo
 
-# Introducción
+## Introducción
 
 El interés por el uso y el funcionamiento de las energías renovables ha crecido mucho en los últimos años y, en particular, la energía producida por el viento. La mejora en la eficiencia de las plantas de producción eólica sigue siendo un desafío pero también una necesidad absoluta.
 

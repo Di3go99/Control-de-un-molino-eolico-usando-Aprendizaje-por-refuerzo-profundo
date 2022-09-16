@@ -1,4 +1,4 @@
-# Control-de-un-molino-eólico-usando-Aprendizaje-por-refuerzo-profundo
+# Control de un molino eólico usando Aprendizaje por refuerzo profundo
 
 ## Autor
 

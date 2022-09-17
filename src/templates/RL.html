@@ -1,14 +1,17 @@
 <form method="post" action="">
-    <p>Power: {{( form.r )}}</p>
-    <p><input type="submit" name="submit_button" value="non-trained"/></p>
-    <p><input type="submit" name="submit_button" value="trained"/></p>
+    <p>Potencia: {{( form.r )}}</p>
+    <p><input type="submit" name="submit_button" value="Sin entrenar"/></p>
+    <p><input type="submit" name="submit_button" value="Entrenado"/></p>
+    <p>Potencia inicial: {{ initPower }}</p>
+    <p>Potencia final: {{ finalPower }}</p>
+    <p>Ángulo óptimo: {{ finalAngle }}</p>
     {% with messages = get_flashed_messages() %} 
         {% if messages %} 
             {% for message in messages %}
                 {{message}}
             {% endfor %}
         {% else %}
-            <p><img src="/" alt=""></p>
-        {% endif %} 
+            <img id="picture" src="data:image/png;base64,{{ plotImg }}" alt="">
+        {% endif %}
     {% endwith %}
 </form>

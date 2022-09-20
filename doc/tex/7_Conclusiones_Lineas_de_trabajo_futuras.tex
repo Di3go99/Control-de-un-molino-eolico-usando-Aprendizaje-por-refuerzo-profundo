@@ -5,19 +5,43 @@ A continuación, se exponen una serie de conclusiones sobre el proyecto realizad
 
 \section{Conclusiones}
 
+\subsection{Conclusiones técnicas}
+
+Como conclusiones técnicas, se ha querido recalcar el cumplimiento de los objetivos principales del proyecto.
+
+\subsubsection{Modelado de una turbina eólica}
+
+Uno de los objetivos era conseguir modelar matemáticamente la turbina de un molino eólico. Esto se ha cumplido satisfactoriamente mediante el uso de las fórmulas obtenidas del libro \textit{Control Multivariable Centralizado con Desacoplo para Aerogeneradores de Velocidad Variable}\cite{control_multivariable} y la aplicación del método de Euler.
+
+\subsubsection{Entrenamiento del modelo}
+
+Otro punto el cuál se logró completar satisfactoriamente fue el entrenamiento de un agente que, usando un algoritmo de entrenamiento por refuerzo y con la ayuda de una red neuronal, fuese capaz de aprender a tomar las acciones correctas para aproximar la potencia generada por la turbina a una potencia deseada de referencia.
+
+\subsection{Aplicación Web}
+
+También mencionar la creación de una interfaz web sencilla para el modelo del molino, el cual era otro de los objetivos propuestos.
+
+De esta manera, el modelo dispone de una mayor accesibilidad a nivel de usuario, ya que no requiere de conocimientos previos de programación para su utilización.
+
+\subsection{Conclusión personal}
+
 Tras la realización de este proyecto, me llevo una sensación positiva tanto por todo lo que he aprendido sobre las diferentes herramientas y puntos temáticos que utilizado e investigado, como por la implicación en la mejora de algo como las energías renovables.
 
 Al mismo tiempo, desde el comienzo hasta el final de la construcción del proyecto, me he dando cuenta de la cantidad de cosas aprendidas en la carrera que he aplicado, incluso inconscientemente, desde el uso de un repositorio hasta el modelado de diagramas \textit{UML}.
 Donde más he tenido esta sensación de facilidad, ha sido a la hora de trabajar con \textit{Python} que, a pesar de ser un lenguaje del cual no poseía muchos conocimientos, el hecho de haber trabajado durante la carrera con distintos lenguajes de programación (unos más parecidos y otros menos) me ha ayudado considerablemente a su comprensión y su uso.
 
-Como conclusión, diría que ha sido un proyecto en el que el hecho de haber abordado un tema en el que se disponían de los conocimientos justos, como es el aprendizaje por refuero, me ha servido considerablemente para comprender mucho mejor el funcionamiento de la inteligencia artificial, a la par que ha despertado un interés en mi tanto por seguir explorando este campo, cómo por descubrir otros nuevos.
-
 
 \section{Líneas futuras}
 
-Aunque es cierto que el proyecto es un modelo muy sencillo al cuál aún le quedan años de investigación y desarrollo, puede servir como idea para impulsar otros proyectos relacionados con la mejora de las energías renovables a través de la inteligencia artificial.
+Aunque es cierto que el proyecto es un prototipo al cual aún le quedan años de investigación y desarrollo, puede servir como idea para impulsar otros proyectos relacionados con la mejora de las energías renovables a través de la inteligencia artificial.
 
 A continuación se describen una serie de mejoras que podrían aplicarse al modelo.
+
+\subsection{Mayor número de acciones}
+
+Una de las posibles mejoras sería aumentar el número de acciones disponibles, ya que ahora mismo el modelo únicamente puede aumentar o disminuir el ángulo en 0,1º.
+
+Si se ampliase el número de acciones de tal forma que el agente pudiese aumentar el ángulo en 1º o en 0.001º, se conseguiría un resultado más preciso, debido a los pequeños cambios y se alcanzaría la potencia de referencia más rápido gracias a cambios mayores.
 
 \subsection{Mejora de la matemática}
 

@@ -33,21 +33,19 @@ La primera parte que se optó por desarrollar, como en cualquier tipo de modelo 
 
 \subsubsection{Primera versión}
 
-En un comienzo, debido al escaso conocimiento inicial del alumno, se optó por realizar un entorno muy básico de 3 acciones discretas en el que se buscaba mantener una variable dentro de un rango de valores.
+En un comienzo, a modo de pequeño prototipo de lo que iba a ser el modelo, se decidió indagar y hacer pruebas con un entorno muy sencillo en el que se pretendía mantener una variable en un rango fijo.
 
-Esto se hizo para primero comprobar el correcto comportamiento del agente entrenado sobre el entorno antes de entrar en la parte matemática del proyecto con el método de Euler y las ecuaciones de la turbina eólica.
+Esto se hizo para primero comprobar el correcto comportamiento del agente entrenado sobre el entorno antes de modelizar matemáticamente la turbina y empezar a entrenar el agente sobre ecuaciones más complejas.
 
 \subsubsection{Segunda versión}
 
-Una vez comprobado que el agente se entrenaba correctamente, se procedió a aumentar el número de acciones para hacer el algoritmo más rápido y preciso.
+En la segunda versión, se implantó el modelado matemático de la turbina y se ajustó la función de recompensa para satisfacer el buen funcionamiento del modelo. Al principio hubo complicaciones ya que el algoritmo no entrenaba correctamente y los resultados no eran muy precisos, pero a base de múltiples pruebas de ensayo y error, se logró ajustar todas las variables para que funcionase correctamente.
 
-También se añadió la parte de la integración numérica de la ecuación de la potencia generada por la turbina mediante el método de Euler y se ajustaron algunos parámetros para optimizar el funcionamiento del algoritmo.
-
-\subsection{Modelo DQN}
+\subsection{Red neuronal}
 
 \subsubsection{Primera versión}
 
-Para la construcción del modelo, se optó por la utilización de una estructura DQN de tipo secuencial, con dos capas ocultas de neuronas que utilizan la función de activación \textit{relu} y una última capa de salida con una función \textit{linear}.
+Para la construcción del modelo, se optó por la utilización de una estructura DQN de tipo secuencial, con una capa de entrada, dos capas ocultas que utilizan la función de activación \textit{relu} y una última capa de salida con una función \textit{linear}.
 
 La función de activación se define como el mecanismo mediante el cual las neuronas mandan información a través de la red. La función \textit{relu} es la más usada en los sistemas de redes neuronales ya que hace el modelo más fácil de entrenar y permite conseguir mejores resultados.
 Lo que hace esta función es devolver el propio valor que le llega como entrada en caso de ser positivo y cero en caso contrario, lo que provoca que menos neuronas de cada capa se activen y la red tenga un mejor rendimiento.
@@ -63,30 +61,29 @@ Esta parte del código no se cambió mucho con respecto a la primera versión, q
 
 Para el agente se asignó una memoria secuencial y la política de Boltzmann\cite{wiki:Boltzmann}.
 
-Esta política esta diseñada para \textit{action spaces} de tipo discreto. Presupone que todas las acciones tienen un valor asignado y utiiza una función \textit{Softmax} para transformar estos valores en un vector de probabilidades. Tras esto utiliza el vector calculado para realizar pruebas con las posibles acciones.
+Esta política esta diseñada para acciones de tipo discretas. Presupone que todas las acciones tienen un valor asignado y usa una función \textit{Softmax} para transformar estos valores en un vector de probabilidades. Tras esto, utiliza el vector calculado para realizar pruebas con las posibles acciones.
 
 \subsubsection{Segunda versión}
 
-Para la versión final, se ajustaron algunos parámetros como el límite de pasos guardados en memoria el cual, tras varias pruebas, se estableció en 50000 y el número de pasos de "calentamiento" que se decidió fijar en 1000.
+Para la versión final, se ajustaron algunos parámetros como el límite de la memoria secuencial el cual, tras varias pruebas, se estableció en 30000 y el número de pasos de calentamiento que se decidió fijar en 1000.
+
+Los pasos de calentamiento sirven para que los optimizadores como el \textit{Adam} para que puedan adaptarse correctamente y procesar mejor los datos recibidos.
 
 \subsection{Entrenamiento}
 
-Para el entrenamiento del agente, se ha usado la función \textit{fit} de \textit{Tensorflow}. 
-Lo primero que hacemos es compilar nuestro agente utilizando el optimizador Adam, que es el de uso común en el aprendizaje por refuerzo, y seguidamente llamamos a la función \textit{fit} en la que, tras varias pruebas, se ha llegado a la conclusión de que 10000 pasos son los suficientes para lograr un buen entrenamiento.
+Para el entrenamiento del agente, se ha usado la función \textit{fit} de la librería \textit{Tensorflow}. 
+Lo primero que hacemos es compilar nuestro agente utilizando el optimizador \textbf{Adam} (los optimizadores en las redes neuronales ayudan a reducir las pérdidas alterando algunos parámetros como el \textit{learning-rate}) y seguidamente llamamos a la función \textit{fit} en la que, tras varias pruebas, se ha llegado a la conclusión de que 20000 pasos son los suficientes para lograr un buen entrenamiento.
 
-Los optimizadores en las redes neuronales, ayudan a reducir las pérdidas alterando algunos parámetros como el \textit{learning rate}.
 
 \subsection{Pruebas}
 
-Durante todo el desarrollo del modelo se han realizado pruebas para comprobar la funcionalidad de todo lo que se iba implementando.
-
-En cuanto a las pruebas de carácter funcional se han dividido en dos tipos.
+Durante todo el desarrollo del modelo se han realizado pruebas para comprobar la funcionalidad de todo lo que se iba implementando. Todas estas pruebas se han realizado en el fichero \textit{Pruebas.ipynb} de la carpeta \textit{/src} del repositorio. Se dividen en dos tipos.
 
 \subsubsection{Pruebas pre-entrenamiento}
 
 Para poder ver claramente la diferencia entre el modelo desentrenado y el entrenado, se realizaron una serie de pruebas tomando acciones aleatorias, donde se ve como el modelo no alcanza nunca la potencia deseada.
 
-\imagen{img_pruebas_graficas/Pre_entrenamiento.png}{Gráfica pruebas pre-entrenamiento.}{0.7}
+\imagen{img_pruebas_graficas/Pre-entrenamiento.png}{Gráfica pruebas pre-entrenamiento.}{0.7}
 \label{fig:pre}
 
 Como podemos observar en la figura \ref{fig:pre}, los resultados del modelo sin entrenamiento muestran una gráfica en la que nunca se alcanza la potencia de referencia ya que las acciones tomadas son totalmente aleatorias.
@@ -95,23 +92,18 @@ Como podemos observar en la figura \ref{fig:pre}, los resultados del modelo sin 
 
 Para las pruebas post entrenamiento, se utilizó el mismo entorno de pruebas que en el caso anterior, pero esta vez dejando que el agente entrenado sea el que tome la decisión sobre qué acción tomar en cada momento, pasándole como referencia un estado inicial aleatorio.
 
-En este caso, para ver el correcto funcionamiento, se realizaron tres tipos de pruebas:
+\imagen{img_pruebas_graficas/Modelo-entrenado.png}{Gráfica pruebas post-entrenamiento sin perturbaciones.}{0.7}
+\label{fig:entrenado}
 
-\begin{itemize}
-    \item Pruebas sin cambios ni perturbaciones.
-    \item Pruebas añadiendo perturbaciones en el viento.
-    \item Pruebas añadiendo cambios en la potencia de referencia.
-\end{itemize}
+Para comprobar la eficacia del modelo, se le ha sometido a distintos tiempos de entrenamiento, llegando a la conclusión de que un entrenamiento de 20000 pasos es suficiente para lograr un buen resultado. Esto se puede ver en el ejemplo de ejecución de la figura \ref{fig:entrenado}, donde se parte de una potencia inicial de 2900 kW y se pretende alcanzar una potencia de referencia de 1000 KW.
 
-\textcolor{red}{Añadir imágenes de las pruebas realizadas tras el entrenamiento.}
+En la figura podemos ver como el modelo entrenado se va aproximando a la potencia de referencia y, una vez alcanzada, se mantiene oscilatorio sobre ella. Esto es por la función de recompensa la cuál, se ha ajustado de tal manera que prioriza el variar el ángulo entre diferentes valores a mantenerlo constante a lo largo del tiempo.
 
 \subsection{Interfaz}
 
 Una vez realizadas las pruebas y comprobado que el modelo realizaba bien las predicciones tras el entrenamiento, se precedió a construir la interfaz web.
 En un comienzo se empezó a desarrollar utilizando la librería de Python \textit{Tkinter} ya que se pedía una interfaz muy sencilla.
 
-El problema vino a la hora de querer implementar esta interfaz en una aplicación web ya que requería de un conocimiento sobre la herramienta más profundo. Debido a esto se decidió investigar otras formas de desarrollar la interfaz y se optó por el uso del paquete \textit{Flask} el cual, aunque fuese algo más complejo debido a la necesidad de conocimiento de HTML, seguía siendo muy sencillo y fácil de implementar en la web.
+El problema vino a la hora de querer implementar esta interfaz en una aplicación web ya que el realizar la conexión era algo complejo e iba a requerir de más tiempo. Debido a esto, se decidió investigar otras formas de desarrollar la interfaz y se optó por el uso del paquete \textit{Flask} el cual, aunque fuese algo más complejo debido a la necesidad de conocimiento de HTML, seguía siendo muy sencillo y fácil de implementar en la web.
 
 Se decidió crear una interfaz sencilla con una plantilla desarrollada en HTML la cual se divide en dos botones y un cuadro de texto. Este cuadro recoge la potencia de referencia y cada uno los botones muestra una gráfica con el resultado pre y post entrenamiento respectivamente.
-
-El desarrollo en python no tiene mucho misterio ya que simplemente se utilizó el mismo código que se usó para realizar las pruebas combinado con las utilidades de \textit{Flask}.

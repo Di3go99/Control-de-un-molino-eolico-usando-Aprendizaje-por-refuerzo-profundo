@@ -12,7 +12,9 @@ El repositorio cuenta con la siguiente distribución:
 \begin{itemize}
     \item \textbf{/}: es el directorio raíz, donde están almacenados todos los archivos del proyecto junto al fichero \textit{README}.
     \item \textbf{/docs}: aquí podemos encontrar toda la documentación del proyecto (memoria y anexos).
-    \item \textbf{/src}: aquí encontramos el archivo \textit{.ipynb} todo el código desarrollado.
+    \item \textbf{/docs/img}: esta carpeta contiene las imágenes utilizadas en la documentación.
+    \item \textbf{/docs/tex}: contiene los ficheros de \LaTeX de cada uno de los apartados de la documentación.
+    \item \textbf{/src}: aquí encontramos los archivos \textit{.ipynb} con todo el código desarrollado. Dentro podemos encontrar el archivo \textit{Paquetes.ipynb} con los paquetes necesarios para ejecutar la aplicación, el archivo \textit{Pruebas.ipynb} con el entorno de pruebas y el archivo \textit{Turbina.ipynb}, desde el cual ejecutamos la aplicación.
     \item \textbf{/src/templates}: contiene el fichero \textit{.html} de la interfaz web.
 \end{itemize}
 
@@ -26,42 +28,46 @@ El objetivo del manual del programador es explicar el funcionamiento del proyect
 Para trabajar con el proyecto correctamente, es necesario instalar las siguiente serie de programas y dependencias:
 
 \begin{itemize}
-    \item \textbf{Python}: es el lenguaje en el que esta desarrollado casi todo el modelo. Es necesario para obtener todas las librerías para el correcto funcionamiento.
-    \item \textbf{Jupyter Notebook}: es el IDE utilizado para el desarrollo del modelo. Es el recomendado para trabajar con el código, aunque se pueden usar otras aplicaciones.
-     \item \textbf{Git}: es necesario para hacer uso del repositorio de GitHub y poder obtener la última versión del proyecto.
+    \item \textbf{\href{https://www.python.org/downloads/}{Python}}: es el lenguaje en el que esta desarrollado casi todo el modelo. Es necesario para obtener todas las librerías para el correcto funcionamiento.
+    \item \textbf{\href{https://jupyter.org/install}{Jupyter Notebook}}: es el IDE utilizado para el desarrollo del modelo. Es el recomendado para trabajar con el código, aunque se pueden usar otras aplicaciones.
+     \item \textbf{\href{https://git-scm.com/book/en/v2/Getting-Started-Installing-Git}{Git}}: es necesario para hacer uso del repositorio de GitHub y poder obtener la última versión del proyecto.
 \end{itemize}
 
 \subsection{Descarga del código fuente}
 
-Para obtener el código fuente y poder trabajar con el se deben seguir los siguientes pasos:
+Para obtener el código fuente y poder trabajar con él se deben seguir los siguientes pasos:
 
 \begin{enumerate}
     \item Abrimos la terminal de Git Bash.
     \item Nos situamos, mediante el comando \textbf{cd}, en el directorio donde queramos guardar el proyecto.
-    \item Utilizamos el comando \textbf{git clone} para clonar los documentos del repositorio en nuestro directorio. El comando completo para este caso es: \textbf{git clone https://github.com/Di3go99/GII-21.35-Control-de-un-molino-eolico-usando-Aprendizaje-por-refuerzo-profundo.git}
+    \item Utilizamos el comando \textbf{git clone} para clonar los documentos del repositorio en nuestro directorio. El comando completo para este caso es: \textbf{git clone https://github.com/Di3go99/Control-de-un-molino-eolico-usando-Aprendizaje-por-refuerzo-profundo.git}
     \item Una vez se complete la descarga, dispondremos de los archivos en nuestro directorio.
 \end{enumerate}
 
-\textcolor{red}{Añadir imagen con captura de pantalla del repositorio.}
-
-Para trabajar con el código del proyecto, simplemente tendremos que abrir Jupyter Notebook y acceder al directorio donde hayamos guardado el proyecto. Tras esto, entramos en la carpeta \textit{/src} y hacemos clik sobre el archivo \textit{.ipynb}.
+Para trabajar con el código del proyecto, simplemente tendremos que abrir Jupyter Notebook y acceder al directorio donde hayamos guardado el proyecto. Tras esto, entramos en la carpeta \textbf{/src} y abrimos el archivo \textit{Turbina.ipynb}, donde encontraremos el código completo de la aplicación.
 
 
 \section{Compilación, instalación y ejecución del proyecto}
+\label{compilacion}
 
-Una vez tenemos abierto el proyecto en Jupyter Notebook, lo primero que debemos hacer es ejecutar la primera celda, la cual se encargará de instalar todos los paquetes necesarios para la ejecución del código.
+Lo primero que debemos hacer es instalar los paquetes necesarios para el código, los cuales podemos observar en la figura \ref{fig:paquetes}. Para ello, abrimos Jupyter Notebook, navegamos hasta la carpeta \textbf{/src} y abrimos el archivo \textit{Paquetes.ipynb}.
 
 \imagen{Paquetes.png}{Paquetes necesarios para el modelo}{0.4}
+\label{fig:paquetes}
 
-Tras esto, simplemente debemos pulsar en \textbf{Cell > Run All} para que se ejecuten todas las celdas de código.
+Una vez cargado el archivo, pulsamos en el botón superior que dice \textbf{Run} y esperamos a que termine la ejecución de la celda.
+
+Por último, volvemos a la carpeta \textbf{/src} y abrimos el archivo \textit{Turbina.ipynb}. Ahora hacemos clic en \textbf{Cell > Run All} (como puede verse en la figura \ref{fig:ejecucion}) para que se ejecuten todas las celdas de código.
 
 \imagen{RunAll.png}{Botón para ejecutar todas las celdas}{0.8}
+\label{fig:ejecucion}
 
 
 \section{Pruebas del sistema}
 
 Las pruebas realizadas sobre el proyecto, han sido pruebas del tipo ensayo-error realizadas durante todo el proceso de creación del mismo. A lo largo del transcurso del proyecto se han ido tomando los ajustes necesarios según el resultado de dichas pruebas.
 
-En cuanto a la calidad del código, se han realizado varios chequeos en Codacy a lo largo del último mes. A continuación se puede ver una gráfica con los resultados.
+En cuanto a las pruebas de calidad del código, se han realizado varios chequeos en Codacy\cite{Codacy} de cada una de las subidas al repositorio a lo largo del último mes. En la figura \ref{fig:codacy2} se puede ver un resumen con la calidad del código según Codacy
 
-\textcolor{red}{Añadir imagen con captura de la gráfica de codacy.}
+\imagen{Codacy.png}{Resumen de la calidad del código según Codacy}{1.1}
+\label{fig:codacy2}

@@ -9,16 +9,39 @@ Mediante la especificación de diseño, se aporta un mayor entendimiento del pro
 En el caso de este proyecto, no es necesario el manejo de datos.
 
 Como mucho podríamos hablar de la memoria secuencial que utiliza el agente. En esta se van almacenando los resultados de los entrenamientos pasados, hasta un límite que definamos nosotros.
-Cuando el backlog de los entrenamientos llega a este límite, la información del último entrenamiento sustituirá a la más antigua en memoria, ya que presupone que esta nueva información es más útil y precisa.
+Cuando el \textit{backlog} de los entrenamientos llega a este límite, la información del último entrenamiento sustituirá a la más antigua en memoria, ya que presupone que esta nueva información es más útil y precisa.
 
 \section{Diseño procedimental}
 
-En este apartado se procede a detallar la secuencia que sigue la ejecución del modelo.
+En este apartado se procede a detallar la secuencia que sigue la ejecución del modelo. 
 
-En el diagrama de secuencia de la figura \ref{fig:DiagramaSecuencia}, se aprecian las interacciones entre los objetos que conforman el modelo.
+En el diagrama de secuencia\cite{diagramaSecuencia} de la figura \ref{fig:DiagramaSecuencia}, se aprecian las interacciones entre los objetos que conforman el modelo.
 
 \imagen{DiagramaSecuenciaTFG.png}{Diagrama de secuencia del modelo}{1.0}
 \label{fig:DiagramaSecuencia}
+
+A continuación se pasa a explicar este diagrama con más detalle:
+
+\begin{itemize}
+    \item Lo primero que se hace es ejecutar la aplicación desde Jupyter Notebook. De esta forma se instancia el entorno, la red neuronal, el agente y se abre el servidor local donde se va a ejecutar la interfaz web.
+    \item A continuación, el usuario abre la interfaz, introduce la potencia a generar y ejecuta uno de los dos botones disponibles. Independientemente del botón pulsado, se hace una comprobación de seguridad, para asegurar que no se haya introducido un valor no numérico o fuera del rango establecido, en caso de que el valor introducido no sea válido, aparecerá un mensaje de error \ref{fig:comprobación}.
+    \item En caso de introducir un valor de potencia válido, dependerá del botón seleccionado el tipo de ejecución.
+\end{itemize}
+
+\imagen{img_capturas_interfaz/ErrorCheck.png}{Comprobación de seguridad}{0.7}
+\label{fig:comprobación}
+
+\subsection{Modelo desentrenado}
+
+Si se elige ejecutar el modelo sin entrenar, lo primero que se hace es modificar el entorno para que la potencia de referencia sea la elegida por el usuario.
+Tras esto se realiza una ejecución del modelo tomando acciones totalmente aleatorias sobre el ángulo del pitch y se muestra una gráfica con un resumen de la ejecución en 2000 pasos, o los pasos ejecutados en caso de haber alcanzado por casualidad la potencia de referencia antes de esos 2000.
+
+\subsection{Modelo entrenado}
+
+En el caso del modelo entrenado, también se modifica el entorno con la potencia de referencia que el usuario introduce. La diferencia es que en este caso, se entrena el agente creado anteriormente durante 20000 pasos (2 minutos aproximadamente).
+Una vez entrenado el agente se vuelve a ejecutar el modelo, pero esta vez en lugar de tomar acciones aleatorias, es el agente el que elige que acción tomar en cada paso.
+
+Por último, una vez terminada la ejecución del modelo, tanto para el modelo entrenado como para el modelo desentrenado, se muestra por pantalla una gráfica y una serie de datos con los resultados de la ejecución.
 
 \section{Diseño de interfaces}
 
@@ -26,5 +49,26 @@ Para este proyecto, se pedía la creación de una interfaz sencilla que permitie
 
 En la figura \ref{fig:interfaz}, se muestra otro diagrama del planteamiento de la interfaz.
 
-\imagen{Interfaz.png}{Diagrama de la interfaz de la aplicación}{1}
+\imagen{DiagramaInterfaz.png}{Diagrama de la interfaz de la aplicación}{1}
 \label{fig:interfaz}
+
+La interfaz se resume en un cuadro de texto donde se introducirá la potencia y dos botones. 
+El botón \textbf{Sin entrenar} muestra una gráfica del funcionamiento del modelo tomando acciones aleatorias, mientras que el botón \textbf{Entrenado}, entrena el agente para esa potencia específica y muestra otra gráfica con el resultado tras el entrenamiento \ref{fig:ResultadoInterfaz}.
+
+\imagen{img_capturas_interfaz/Resultado-interfaz.png}{Ejemplo de respuesta gráfica de la interfaz ante una ejecución sin entrenar.}{1}
+\label{fig:ResultadoInterfaz}
+
+En la gráfica de la izquierda esta representada la potencia calculada con una línea azul y la potencia de referencia con una línea roja. En la gráfica de la izquierda esta representado el valor del ángulo durante toda la ejecución, todo ello para un viento de 10 m/s.
+
+\imagen{img_capturas_interfaz/entrenado-grafica.png}{Ejemplo de respuesta gráfica de la interfaz ante una ejecución con el modelo entrenado.}{1}
+\label{fig:entrenadoGrafica}
+
+Aquí \ref{fig:entrenadoGrafica} otro ejemplo de respuesta de la interfaz, pero esta vez con el modelo entrenado para una potencia de referencia de 2000 kW. Como se puede comprobar, esta vez la potencia generada alcanza la de referencia antes de los 2000 pasos.
+
+Además de un resultado gráfico, también se aportan tanto la potencia inicial, como la potencia final y el ángulo del pitch óptimo de esa ejecución \ref{fig:datosInterfaz}.
+
+\imagen{img_capturas_interfaz/DatosInterfaz.png}{Ejemplo de resultados para una ejecución con potencia de referencia 2000 kW.}{0.5}
+\label{fig:datosInterfaz}
+
+Todo ello con la intención de aportar al usuario datos más precisos, ya que a través de la gráfica solo podemos estimar el resultado final debido a que no se ve con claridad.
+
